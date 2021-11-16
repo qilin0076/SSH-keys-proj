@@ -49,11 +49,48 @@
         将文件提交保存到Git
         git commit -a -m "第一次提交"
 
+        GitHub上会有教程
         将本地仓库和远程仓库进行关联，把远程仓库命名为origin，后面为访问路径
         git remote add origin git@github.com:qilin0076/SSH-keys-proj.git
 
         将本地仓库的内容推送到远程的origin仓库中（仅限第一次提交代码到远程仓库第二次第三次以及以后都只需要执行git push就行）
-        git push -u origin master
+        git branch -M main
+        git push -u origin main
+
+        Git 常见错误 之 error: src refspec xxx does not match any / error: failed to push some refs to 简单解决方法
+        错误产生原因：由于受到"Black Lives Matter"运动的影响，GitHub 从2020年 10 月 1 日起，在该平台上创建的所有新的源代码仓库将默认被命名为 “main”，而不是原先的"master"。
+
+        解决方式：（方法不唯一，仅供参考）
+        统一远程和本地的仓库名称即可
+        1、把本地的 master 仓库名称修改为远端的 main
+        重命名命令： git branch -m oldBranchName newBranchName
+
+        附录：（网路上其他方法参考）
+        本地文件上传github 报错error：src refspec master does not match any
+        git push origin master
+
+        可能存在原因：
+        本地文件与github上的文件有冲突
+        本地需要提交的文件中存在空文件
+        本地的origin和remote origin/master 没有建立关联（我出错的原因）
+
+        解决方法：
+        1、针对第三种情况导致的错误，重新建立本地和远端的连接
+        $ git remote remove origin
+        $ git remote add origin git@github.com:XXX/XXX.github.io.git
+        $ git push origin master
+
+        2、针对第一、二种情况导致的错误
+        $ touch README
+        $ git add README
+        $ git commit -m "change"
+        $ git push origin master
+        针对第一、二种情况更详细的说明点击
+
+        总结
+        导致错误的原因就是没有理解 origin 和 master
+        clone 操作之后，Git 会自动将此远程仓库命名为 origin ，建立指针指向项目的指针master
+        origin 只相当于一个指针指向你 github 远端的地址（仓库名）/（分支名）origin/master 代表远程分支
      -->
 </body>
 
